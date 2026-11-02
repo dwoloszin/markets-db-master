@@ -19,6 +19,7 @@ the same architecture: no manager database, no AI matching, no Supabase.
 | Giga | VTEX | inline `ean` | 7,363 | 96.2% | 9 min |
 | Higas | Instabuy / ibecom v5 | legacy table + cross-market fill (API exposes none) | 15,276 | 54.9% | 25 min (paced, per department) |
 | Hirota | VipCommerce | inline `codigo_barras` | 9,788 | 100% | 6 min |
+| Mambo | VTEX IO | inline `ean` | 14,947 | 94.0% | 12 min |
 | Master Supermercados | VipCommerce | inline `codigo_barras` | 22,344 | 95.9% | 14 min |
 | Nagumo | Salesforce Commerce Cloud | legacy table + cross-market fill (site exposes none) | 14,425 | 30.0% | 16 min |
 | St. Marche | Shopify | product JSON `barcode` list (enrichment) | 15,201 | 92.4% | 1 min (+30 first enrichment) |
@@ -26,6 +27,7 @@ the same architecture: no manager database, no AI matching, no Supabase.
 | Pão de Açúcar | GPA / Linx API | PDP HTML `"ean"` | 13,888 | 99.3% | 9 min (+5 enrichment) |
 | Rossi | VipCommerce | inline `codigo_barras` | 13,283 | 94.1% | 9 min |
 | Sam's Club | VTEX | inline `ean` | 4,170 | 99.8% | 7 min |
+| Casa Santa Luzia | VTEX IO | inline `ean` (GTIN-8 allowed) | 15,731 | 98.6% | 11 min |
 | Sonda Delivery | ASP.NET HTML | image path + PDP JSON-LD | 11,363 | 97.9% | 19 min (+6 enrichment) |
 | Spani | VipCommerce | inline `codigo_barras` | 5,630 | 97.5% | 4 min |
 | Swift | VTEX | inline `ean` | 990 | 100% | 1 min |

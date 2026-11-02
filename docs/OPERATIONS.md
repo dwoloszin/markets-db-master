@@ -111,6 +111,26 @@ python -m db.db_manager sync-hub                     # optional consolidated app
 
 `--post` in `main.py` does mark-stale + prune for the markets that just ran.
 
+### GitHub's 60-day auto-disable
+
+GitHub disables a scheduled workflow after 60 days with no repository activity, and warns by
+email ("The Scrape workflow ... will be disabled soon"). A schedule firing does not count as
+activity, and the market repos only write to Neon, so nothing committed to them after a deploy.
+
+The last step of `deploy/store-scrape.yml` handles this. It pushes a small `.last_run` file when
+the newest commit is over 30 days old, whatever the scrape outcome. A deploy deletes `.last_run`,
+which is harmless because the next keep-alive recreates it. To test one repo:
+
+```bash
+gh workflow run Scrape -R dwoloszin/markets-db-davo -f probe=true -f force_keepalive=true
+```
+
+If a workflow was already disabled, re-enable it, because a commit alone does not turn it back on:
+
+```bash
+gh workflow enable Scrape -R dwoloszin/markets-db-<slug>
+```
+
 ## Troubleshooting
 
 | symptom | what to check |

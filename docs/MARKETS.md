@@ -161,6 +161,15 @@ Conventions: `CEP` = 8-digit ZIP; "inline" = barcode present in the listing;
   store_id `hirota:1:1`, national prices.
 * 21 departments, `codigo_barras` on every product, ~97.6% valid GTIN. ~5 min.
 
+## Mambo - `markets/mambo` (VTEX IO)
+
+* Catalog API on `www.mambo.com.br` (account `mambodelivery`): one root category "Mambo",
+  14 departments, 33 segments, ~18k products. `items[0].ean` on every product, ~92% valid GTIN
+  (produce/butcher/bakery carry `2000xxx` PLU codes).
+* 9 stores = sellers `mambodelivery2xx` (pickup-points lists them); regions maps a CEP to one
+  store and some CEPs are unserved. Checkout simulation of 150 SKUs on 3 stores: 1 difference ->
+  national prices, store_id `mambo`, catalog seller `1`. Added 2026-10-27.
+
 ## Master Supermercados - `markets/master` (VipCommerce, org 193)
 
 * Same API and shared login key as Rossi; domain `lojaonline.mastersupermercados.com.br`, org 193.
@@ -218,6 +227,15 @@ Conventions: `CEP` = 8-digit ZIP; "inline" = barcode present in the listing;
   ~19k products but only ~4.2k carry a price (the rest have Price=0/IsAvailable=false with or
   without regionId = not sold any more); rows without price are not offers and are skipped.
   ~7 min.
+
+## Casa Santa Luzia - `markets/santaluzia` (VTEX IO)
+
+* Catalog API on `www.santaluzia.com.br` (25 departments, 44 segments, ~15.8k products).
+* Single online store: regions returns no sellers for any CEP; catalog seller `1` ->
+  store_id `santaluzia`, national prices.
+* `items[0].ean` on ~95%. Imported goods carry genuine EAN-8 codes, so GTIN-8 is accepted
+  (89.8% valid without it, 95.3% with it). The host sometimes resets TLS handshakes;
+  request_with_retry absorbs it, pace 0.2 s. ~10 min. Added 2026-10-27.
 
 ## Sonda Delivery - `markets/sonda` (ASP.NET HTML)
 
